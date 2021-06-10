@@ -2,8 +2,10 @@ const UserService = require("../Services/User");
 
 const userService = new UserService();
 
+// Handle signup actions
 exports.signup = async (req, res) => {
   try {
+    // connect the signup to user service
     const { isValid, message } = await userService.signup(req, res);
     if (isValid === true) {
       return res.json({
@@ -24,6 +26,7 @@ exports.signup = async (req, res) => {
   }
 };
 
+// Handle signin actions
 exports.signin = async (req, res) => {
   try {
     const { isValid, message, data } = await userService.signin(req, res);
@@ -48,6 +51,7 @@ exports.signin = async (req, res) => {
   }
 };
 
+// Handle refresh actions
 exports.refresh = async (req, res) => {
   try {
     const { isValid, message } = await userService.refresh(req, res);

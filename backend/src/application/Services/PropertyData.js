@@ -3,6 +3,7 @@ const db = require("../Models");
 const PropertyData = db.PropertyData;
 
 class PropertyDataService {
+  // Retrieve and return all property data from the database
   async lists(req, res) {
     const results = await PropertyData.find();
 
@@ -13,6 +14,7 @@ class PropertyDataService {
       };
   }
 
+  // Create and Save a new property data
   async create(req, res) {
     const { propertyId, propertyName, income, expense } = req.body;
 
@@ -30,6 +32,7 @@ class PropertyDataService {
       };
   }
 
+  // Find a single property data with a propertyId
   async view(req, res) {
     const { id } = req.params;
 

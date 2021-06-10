@@ -1,4 +1,5 @@
 module.exports = (mongoose) => {
+  // Define schema
   const schema = mongoose.Schema({
     propertyId: {
       type: Number,

@@ -6,6 +6,7 @@ const { sign, verify } = require("jsonwebtoken");
 const User = db.User;
 
 class UserService {
+  // Create and Save a new user
   async signup(req, res) {
     const { username, password } = req.body;
 
@@ -32,6 +33,7 @@ class UserService {
       };
   }
 
+  // SignIn a user
   async signin(req, res) {
     const { username, password } = req.body;
 
@@ -63,6 +65,7 @@ class UserService {
     };
   }
 
+  // Validate token
   async refresh(req, res) {
     const authHeader = req.headers["authorization"];
     const token = authHeader.split(" ")[1];

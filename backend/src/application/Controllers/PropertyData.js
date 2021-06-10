@@ -2,6 +2,7 @@ const PropertyDataService = require("../Services/PropertyData");
 
 const propertyDataService = new PropertyDataService();
 
+// Handle new property data actions
 exports.new = async (req, res) => {
   try {
     const { isValid, data } = await propertyDataService.create(req, res);
@@ -21,6 +22,7 @@ exports.new = async (req, res) => {
   }
 };
 
+// Handle lists property data actions
 exports.lists = async (req, res) => {
   try {
     const { isValid, data } = await propertyDataService.lists(req, res);
@@ -40,6 +42,7 @@ exports.lists = async (req, res) => {
   }
 };
 
+// Handle view property data info
 exports.view = async (req, res) => {
   try {
     const { isValid, data } = await propertyDataService.view(req, res);

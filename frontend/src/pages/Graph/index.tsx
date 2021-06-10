@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Col, Row, Card, CardBody } from "reactstrap";
 import Select from "react-select";
 
 import { EnhancedBar } from "../../components/Charts/EnhancedBar";
 import { propertyLists, propertyView } from "../../services/propertyData";
+import { Context } from "../../context/Context";
 
 export const Graph: React.FC = () => {
+  const { state } = useContext(Context);
   const [month, setMonth] = useState<string[]>([]);
   const [income, setIncome] = useState<number[]>([]);
   const [expense, setExpense] = useState<number[]>([]);
@@ -14,13 +16,13 @@ export const Graph: React.FC = () => {
 
   useEffect(() => {
     (async function resources() {
-      const { status, data } = await propertyLists();
+      const { status, data } = await propertyLists(state.accessToken);
 
       if (status === 200) {
         setLists(data.data);
       }
     })();
-  }, []);
+  }, [state.accessToken]);
 
   useEffect(() => {
     if (propertyId) {
@@ -28,7 +30,7 @@ export const Graph: React.FC = () => {
         const {
           status,
           data: { data },
-        } = await propertyView(propertyId);
+        } = await propertyView(propertyId, state.accessToken);
 
         const income_label = Object.keys(data.income);
         const income_value: number[] = Object.values(data.income);
@@ -40,7 +42,7 @@ export const Graph: React.FC = () => {
         }
       })();
     }
-  }, [propertyId]);
+  }, [propertyId, state.accessToken]);
 
   const handleChange = (e: { propertyId: number; propertyName: string }) => {
     setPropertyId(e.propertyId);
